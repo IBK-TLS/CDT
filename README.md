@@ -37,8 +37,8 @@ Datasets are provided in /data:
 They contain anomalies of different types such as  positives peaks (PP), negatives peaks (PN), and sudden variations (VN, VP)
 * Yahoo’s S5 Webscope Dataset: which is publicly available on [this link](https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70), consists of 371 files divided into four categories, named A1/A2/A3 and A4. 
 
-### Usage
-Geoffrey Roman-Jimenez, IRIT, CNRS , France.
-Ines Ben Kraiem, IRIT, University of Toulouse 2, France.
+### Contributors
+* Geoffrey Roman-Jimenez, IRIT, CNRS , France.
+* Ines Ben Kraiem, IRIT, University of Toulouse 2, France.
 
 ### Licence
