@@ -1,3 +1,16 @@
+"""
+Composition-based decision tree for anomaly detection
+-------------------------------
+CDT detector.
+
+:authors: Ines Ben Kraiem & Geoffrey Roman-Jimenez
+
+:copyright:
+    Copyright 2020 SIG Research Group, IRIT, Toulouse-France.
+    
+
+"""
+
 import numpy as np
 import pandas as pd
 import argparse
@@ -14,6 +27,23 @@ from os.path import isfile, join
 
 
 def labelisation_automatic(values, div=4, epsilon=1):
+	""" Labelization method using patterns.
+
+    Parameters
+    ----------
+    values : list
+        List of continuous time -series data.
+    div : int
+        number of split for patterns.
+    epsilon: float
+		The margin of error to consider a remarkable point comm constant (cst)
+		
+	Returns
+        -------
+        labels : np.array
+            labeled time-series data.
+    """
+
     divstep = 100/div 
     l_tuple = []
     for i in range(div):
@@ -26,7 +56,19 @@ def labelisation_automatic(values, div=4, epsilon=1):
         y_p = values[i+1]
         dym = y-y_m
         dyp = y-y_p
-
+		""" 
+		We define nine general patterns used for liberalization: 
+		- PP (Positive Peak)
+		- PN (Negative Peak)
+		- SCP (Start Constant Positive)
+		- SCN (Start Constant Negative)
+		- ECP (End Constant Positive)
+		- ECN (End Con-stant Negative
+		- CST (Constant
+		- VP (Variation Positive
+		- VN (VariationNegative)
+		
+		"""
         for (lsm_min, lsm_max), (lsp_min, lsp_max) in list(itertools.product(l_tuple, repeat=2)): 
             sm_max = lsm_max/100
             sm_min = lsm_min/100
