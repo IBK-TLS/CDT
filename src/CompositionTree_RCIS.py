@@ -1,3 +1,18 @@
+"""
+Composition-based decision tree for  anomaly detection
+-------------------------------
+CDT detector.
+
+:authors: Ines Ben Kraiem & Geoffrey Roman-Jimenez
+
+:copyright:
+    Copyright 2020 SIG Research Group, IRIT, Toulouse-France.
+    
+
+"""
+
+
+
 import numpy as np
 import uuid
 import itertools
@@ -5,6 +20,7 @@ import copy
 
 
 def gini_impurity(classes, nclasses):
+	# calculation of probabilities (or fractions of observations)
     prob = [0.0 for _ in range(nclasses)] 
     N = len(classes)
     for obs in classes:
@@ -60,6 +76,21 @@ def minmax_union(c1, c2):
 
 class node_tree():
     def __init__(self, observations, classes, gini, parent, split_rule, active=True):
+		""" Definition of node. 
+		
+		 Parameters
+		----------
+		observations : set 
+			The set of observations considered in this node
+		classes : list 
+			The list of classes corresponding to observations.
+		gini : float
+			gini index of the current node
+		parent : object
+			node-parent of the current node
+		split_rule : .....
+		
+        """
         self.observations = observations
         self.classes = classes
         self.gini = gini
@@ -74,6 +105,8 @@ class node_tree():
         return d
 
 def list_of_all_possible_composition(observations):
+
+	# Calculate all the compositions of the observations that have a class 'anomaly'.
     listofcomposition = []
     for o in observations:
         for i, j in itertools.combinations(range(len(o) + 1), 2):
@@ -102,6 +135,7 @@ class composition_tree():
         self.nblabels = None
 
     def split(self, node):
+		# Split the node in [node true, node false] by maximizing the gain of Gini.
         observations = node.observations
         classes = node.classes
         parent = node.id
@@ -117,6 +151,7 @@ class composition_tree():
         gain_gini_max = 0
         
         for composition in list_of_all_possible_composition(observations_with_anomaly):
+		# split the nodes according to the presence or not of the composition
             _classes_true = [ c for o, c in zip(observations, classes) 
                             if islistinlist(composition, o) ]
             _gini_true = gini_impurity(_classes_true, self.nclasses)
@@ -153,6 +188,18 @@ class composition_tree():
         return [node_true, node_false], gain_gini 
     
     def fit(self, observations, classes):
+		""" Fit CDT to the time series data.
+            
+
+        Parameters
+        ----------
+        observations : dictionary {number: np.array}
+            list containing the windowed labeled time series data.
+        classes : dictionary {number: np.array}
+            list containing the classes corresponding to each observation (window).
+        
+        
+        """
         
         gini = gini_impurity(classes, self.nclasses)
         
@@ -162,6 +209,7 @@ class composition_tree():
         self.queue =  [self.root]
         self.tree = [self.root]
         
+		# Tree construction 
         n=0
         while not len(self.queue) == 0 and n < self.iteration_max:
             node = self.queue.pop(0)
@@ -226,6 +274,19 @@ class composition_tree():
         return c
     
     def which_leaf(self, observation):
+		""" Classify a new observation.
+
+        Parameters
+        ----------
+        observation : list 
+            a windowed observation from a test datasets.
+			
+		Returns
+        -------
+        leaf : .....
+		
+		class_of_leaf: 0 (normal) or 1 (anomaly)
+        """
         _leaf = self.root
         childrens = self.get_childrens(_leaf)
         while not len(childrens) == 0:
@@ -278,6 +339,14 @@ class composition_tree():
         return rules
 
     def anomaly_rules(self):
+		""" extrat and simplify  rules from CDT.
+
+        
+        Returns
+        -------
+        rpc : dictionary 
+            rules per class. 
+        """
         rpc = self.rules_per_class()
         
         rpc = [[[{"split_rule":{"composition": r.split_rule["composition"], "condition": r.split_rule["condition"], "active":True }, "classes":[r.classes.count(0), r.classes.count(1)] } for r in rb] for rb in rules] for rules in rpc]
