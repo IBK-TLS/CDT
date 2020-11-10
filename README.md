@@ -1,5 +1,5 @@
 ## Composition-based Decision Tree
-Implementation of *Composition-based Decision Tree for anomaly detection in uni-variate Time Series*, by Geoffrey Roman-Jimenez and Ines Ben Kraiem. 
+Implementation of *Composition-based Decision Tree for anomaly detection in uni-variate Time Series*, by Ines Ben Kraiem and Geoffrey Roman-Jimenez. 
 
 Paper published at 14th International Conference on Research Challengesin Information Science (RCIS) (2020).
 
@@ -21,24 +21,34 @@ CDT consist of 4 major steps:
 * Clone the repository
 
 ### Usage 
-CDT consists of ..... for pre-processing and methods.CDT for predicting multiple anomalies.
+CDT consists of *labialization* for labeling time-series using patterns and *CompositionTree_RCIS* for detecting multiple anomalies using modified decision-tree.
 
-Parameters for methods.PreProcessor are:
+Parameters for *labialization* are:
 
-window_size and step control the creation of fixed sized sliding windows in continous time series.
-dow can be used for downsampling a continuous timeseries using a moving average.
-....
+* `nbsplitlabel`: The number of splits to identify different magnitudes of the variety of patterns. 
 
-Parameters for methods.PBAD are:
-....
+Parameters for *Preprocessing* are:
+* `window and step`: control the creation of fixed sized sliding windows in continous time series.
+* `kernel_size and kernel_stride`: can be used for downsampling a continuous timeseries using a moving average.
 
-Datasets are provided in /data:
+Parameters for CompositionTree_RCIS are:
+* CompositionTree_RCIS.composition_tree
+    * `nclasses`: is the number of classes ( in our approach  2 classes: 0=normal, 1=anomaly) 
+
+* CompositionTree_RCIS.fit are:
+    * `features`: is the observations calculated by sliding window
+    * `classes`: is the list of classes corresponding to each observation (window)
+
+We illustrate theses classes in the notebook `/src/experiments_RCIS_CompositionTree.ipynb`.
+
+Datasets are provided in `/data`:
 * SGE data sets: Univariate Time series Calorie data consists of readings from 25 meters deployed in different buildings.
 They contain anomalies of different types such as  positives peaks (PP), negatives peaks (PN), and sudden variations (VN, VP)
 * Yahoo’s S5 Webscope Dataset: which is publicly available on [this link](https://webscope.sandbox.yahoo.com/catalog.php?datatype=s&did=70), consists of 371 files divided into four categories, named A1/A2/A3 and A4. 
 
 ### Contributors
-* Geoffrey Roman-Jimenez, IRIT, CNRS , France.
 * Ines Ben Kraiem, IRIT, University of Toulouse 2, France.
+* Geoffrey Roman-Jimenez, IRIT, CNRS , France.
+
 
 ### Licence
