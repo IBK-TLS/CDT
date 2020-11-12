@@ -3,7 +3,7 @@ Implementation of *Composition-based Decision Tree for anomaly detection in uni-
 
 Paper published at 14th International Conference on Research Challengesin Information Science (RCIS) (2020).
 
->Anomaly detection in time-series is an important issue in many applications. It is particularly hard to accurately detect multiple anomalies in time-series. Pattern discovery >and rule extraction are effective solutions for allowing multiple anomaly detection. 
+>Anomaly detection in time-series is an important issue in many applications. It is particularly hard to accurately detect multiple anomalies in time-series. Pattern discovery and rule extraction are effective solutions for allowing multiple anomaly detection. 
 >In this paper, we define a Composition-based Decision Tree algorithm that automatically discovers and generates human-understandable classification rules for multiple anomaly >detection in time-series. To evaluate our solution, our algorithm is compared to other anomaly detection algorithms on real datasets and benchmarks.
 
 [Full paper](https://link.springer.com/chapter/10.1007/978-3-030-50316-1_19)
