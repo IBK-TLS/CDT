@@ -7,7 +7,7 @@ CDT detector.
 
 :copyright:
     Copyright 2020 SIG Research Group, IRIT, Toulouse-France.
-    
+
 
 """
 
@@ -22,37 +22,38 @@ import uuid
 import pickle
 import itertools
 
-from labelisation import labelisation_automatic
-from CompositionTree_RCIS import composition_tree
+from CDT_labelisation import labelisation_automatic
+from CDT import composition_tree
 
-def cdt_compute_result(dirdataset,cdt, window, step, nbsplitlabel, kernel_size, kernel_stride):
-	""" Test the newly labeled time-series on CDT and calculate metrics evaluation.
+
+def cdt_compute_result(dirdataset, cdt, window=5, step=1, nbsplitlabel=4, kernel_size=1, kernel_stride=1):
+    """ Test the newly labeled time-series on CDT and calculate metrics evaluation.
 
     Parameters
     ----------
-    
+
     dirdataset : CSV files with two columns column (Class: the class of anomaly, Value: the measure of sensors)
         time-series data set for testing.
     cdt : object
         the classifier
     window : int
-        Fixed window size. 
+        Fixed window size.
     step : int
         The step of sliding window.
     nbsplitlabel : int
         The number of splits to identify different magnitudes of the variety of patterns.
 	kernel_size : int
 		Size of moving average for downsampling
-	kernel_stride : int 
+	kernel_stride : int
 		The step of moving average for downsampling
-		
+
 	Returns TP, TN, FP, FN, acc, recall, precision, f1
         -------
         TP : float
             True positive: anomalous observation identified as anomalous (i.e., true alarms)
 		TN : float
 			True negative : normal observation identified as normal (i.e., successful detections)
-		FP : float 
+		FP : float
 			False positive: normal observation identified as anomalous(i.e., false alarms)
 		FN : float
 			False negative : anomalous observation identified as normal (i.e., missed detections)
@@ -64,9 +65,9 @@ def cdt_compute_result(dirdataset,cdt, window, step, nbsplitlabel, kernel_size, 
 			quantifies the number of positive class predictions that actually belong to the positive class.
 		f1 : float
 			 the harmonic mean of precision and recall.
-        	
     """
-    list_file = [_f for _f in listdir(dirdataset) if isfile(join(dirdataset, _f))]
+    
+    list_file = [_f for _f in listdir(dirdataset) if isfile(join(dirdataset, _f)) ]
     mind = (window-1)/2
 
     features = []
