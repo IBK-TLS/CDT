@@ -14,30 +14,21 @@ CDT consist of 4 major steps:
 1. Time-series are pre-processed by performing a normalization of values.
 2. The pre-defined patterns are used to automatically create labeled time-series.
 3. A modified decision tree is created to construct an anomaly detection classifier and to generate decision rules.
-4. Rule simplification and generation. 
+4. Rule generation from the tree for anomaly detection. 
 
 ### Installation
 * Code is implemented in Python
 * Clone the repository
 
 ### Usage 
-CDT consists of *labialization* for labeling time-series using patterns and *CompositionTree_RCIS* for detecting multiple anomalies using modified decision-tree.
+CDT consists of  for labeling time-series using patterns, *src.CDT* for detecting multiple anomalies using modified decision-tree and *src.CDT_test* for testing. 
 
-Parameters for *labialization* are:
+* *src.CDT_labelisation*: for labeling time-series using patterns. 
+* *src.CDT*: for detecting multiple anomalies using modified decision-tree
+* *src.CDT_test* : for testing (F1, recall, precision, FP, FN)
+* *src.helper* : for preprocessing such as normalization, downsampling, labeling and sliding windows. 
 
-* `nbsplitlabel`: The number of splits to identify different magnitudes of the variety of patterns. 
 
-Parameters for *Preprocessing* are:
-* `window and step`: control the creation of fixed sized sliding windows in continous time series.
-* `kernel_size and kernel_stride`: can be used for downsampling a continuous timeseries using a moving average.
-
-Parameters for CompositionTree_RCIS are:
-* CompositionTree_RCIS.composition_tree
-    * `nclasses`: is the number of classes ( in our approach  2 classes: 0=normal, 1=anomaly) 
-
-* CompositionTree_RCIS.fit are:
-    * `features`: is the observations calculated by sliding window
-    * `classes`: is the list of classes corresponding to each observation (window)
 
 We illustrate theses classes in the notebook `/src/experiments_RCIS_CompositionTree.ipynb`.
 
