@@ -30,7 +30,7 @@ CDT consists of:
 
 
 
-We illustrate theses classes in the notebook `/src/experiments_RCIS_CompositionTree.ipynb`.
+We illustrate theses classes in the notebook `/src/CDT_experiments_RCIS.ipynb`.
 
 Datasets are provided in `/data`:
 * SGE data sets: Univariate Time series Calorie data consists of readings from 25 meters deployed in different buildings.
