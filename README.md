@@ -21,12 +21,12 @@ CDT consist of 4 major steps:
 * Clone the repository
 
 ### Usage 
-CDT consists of  for labeling time-series using patterns, *src.CDT* for detecting multiple anomalies using modified decision-tree and *src.CDT_test* for testing. 
+CDT consists of:
 
-* *src.CDT_labelisation*: for labeling time-series using patterns. 
-* *src.CDT*: for detecting multiple anomalies using modified decision-tree
-* *src.CDT_test* : for testing (F1, recall, precision, FP, FN)
-* *src.helper* : for preprocessing such as normalization, downsampling, labeling and sliding windows. 
+* `src.CDT_labelisation`: for labeling time-series using patterns. 
+* `src.CDT`: for detecting multiple anomalies using modified decision-tree
+* `src.CDT_test` : for testing (F1, recall, precision, FP, FN)
+* `src.helper` : for preprocessing such as normalization, downsampling, labeling and sliding windows. 
 
 
 
